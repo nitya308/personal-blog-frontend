@@ -1,3 +1,9 @@
+import './styles.scss';
 import $ from 'jquery';
 
-$('#main').html('Here we go!');
+let counter = 0;
+
+setInterval(() => {
+  counter += 1;
+  $('#main').html(counter);
+}, 1000);
