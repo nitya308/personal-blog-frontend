@@ -14,4 +14,5 @@ It wouldn't work without moving eslint to dependencies and not just dev dependen
 None
 
 ## Screenshots
-[photo-1546527868-ccb7ee7dfa6a](https://user-images.githubusercontent.com/64368452/231619878-337dded5-b17f-4620-9e4e-80179419becc.jpeg)
+
+<img width="1451" alt="Screen Shot 2023-04-12 at 9 10 51 PM" src="https://user-images.githubusercontent.com/64368452/231620910-47bb6b53-cc32-4a44-b3a2-289bf6357641.png">
