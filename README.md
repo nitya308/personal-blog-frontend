@@ -14,5 +14,6 @@ Setting up the favicon and the node JS version
 Favicon setup
 
 ## Screenshots
+<img width="1280" alt="Screen Shot 2023-04-21 at 12 41 48 AM" src="https://user-images.githubusercontent.com/64368452/233542516-52993ac3-7062-431c-8926-5ffd47cac4ff.png">
 
 <img width="1280" alt="Screen Shot 2023-04-12 at 9 55 21 PM" src="https://user-images.githubusercontent.com/64368452/231627062-a171028e-73ab-4afc-86b1-7977fc1f7cf7.png">
