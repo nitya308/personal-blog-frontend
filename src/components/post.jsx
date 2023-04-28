@@ -1,20 +1,25 @@
+/* eslint-disable jsx-a11y/label-has-associated-control */
+/* eslint-disable react/jsx-no-comment-textnodes */
+/* eslint-disable no-unused-vars */
 /* eslint-disable import/no-extraneous-dependencies */
 import React, { useState, useEffect } from 'react';
 import ReactMarkdown from 'react-markdown';
 import { useParams } from 'react-router';
 // some imports
 import { connect } from 'react-redux';
+import Paper from '@mui/material/Paper';
+import TextareaAutosize from 'react-textarea-autosize';
 import { fetchPost, deletePost, updatePost } from '../actions/index';
 
 function Post(props) {
-  const { id } = useParams();
+  const { postID } = useParams();
+  console.log('id', postID);
 
   useEffect(() => {
-    props.fetchPost(id);
+    props.fetchPost(postID);
   }, []);
 
   const {
-    // eslint-disable-next-line no-unused-vars
     title, content, tags, coverUrl,
   } = props.currentPost;
 
@@ -25,7 +30,7 @@ function Post(props) {
   const [newContent, setNewContent] = useState(content);
 
   const handleDeletePost = () => {
-    props.deletePost(id);
+    props.deletePost(postID);
   };
 
   const handleUpdatePost = () => {
@@ -40,48 +45,52 @@ function Post(props) {
   };
 
   function renderPost() {
-    <div>
-      <h1>{title}</h1>
-      <img src={coverUrl} alt={title} />
-      <div>{tags}</div>
-      <ReactMarkdown>{content}</ReactMarkdown>
-    </div>;
+    return (
+      <div>
+        <h1>{title}</h1>
+        <img src={coverUrl} alt={title} />
+        <div>{tags}</div>
+        <ReactMarkdown>{content}</ReactMarkdown>
+      </div>
+    );
   }
 
   function renderEditMode() {
-    <form>
-      <label htmlFor="title">Title:
-        <input
-          id="title"
-          type="text"
-          value={newTitle}
-          onChange={(event) => setNewTitle(event.target.value)}
-        />
-      </label>
-      <label htmlFor="imgUrl">Image URL:
-        <input
-          id="imgUrl"
-          type="text"
-          value={newImgUrl}
-          onChange={(event) => setNewImgUrl(event.target.value)}
-        />
-      </label>
-      <label htmlFor="tags">Tags:
-        <input
-          id="tags"
-          type="text"
-          value={newTags}
-          onChange={(event) => setNewTags(event.target.value)}
-        />
-      </label>
-      <label htmlFor="content">Content:
-        <textarea
-          id="content"
-          value={newContent}
-          onChange={(event) => setNewContent(event.target.value)}
-        />
-      </label>
-    </form>;
+    return (
+      <form>
+        <label htmlFor="title">Title:
+          <input
+            id="title"
+            type="text"
+            value={newTitle}
+            onChange={(event) => setNewTitle(event.target.value)}
+          />
+        </label>
+        <label htmlFor="imgUrl">Image URL:
+          <input
+            id="imgUrl"
+            type="text"
+            value={newImgUrl}
+            onChange={(event) => setNewImgUrl(event.target.value)}
+          />
+        </label>
+        <label htmlFor="tags">Tags:
+          <input
+            id="tags"
+            type="text"
+            value={newTags}
+            onChange={(event) => setNewTags(event.target.value)}
+          />
+        </label>
+        <label htmlFor="content"> Content:
+          <TextareaAutosize required
+            id="content"
+            value={newContent}
+            onChange={(event) => setNewContent(event.target.value)}
+          />
+        </label>
+      </form>
+    );
   }
 
   function renderEditIcon() {
@@ -101,13 +110,13 @@ function Post(props) {
   }
 
   return (
-    <div className="single-post">
+    <Paper className="single-post">
       <div className="icons">
         {renderEditIcon()}
         <i role="button" tabIndex="0" aria-label="Delete" onClick={handleDeletePost} className="fa fa-trash-o icon-delete" />
       </div>
       {renderBasedOnMode()}
-    </div>
+    </Paper>
   );
 }
 

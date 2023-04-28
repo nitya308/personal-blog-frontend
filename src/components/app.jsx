@@ -11,8 +11,8 @@ function Nav(props) {
   return (
     <nav>
       <ul>
-        <li><NavLink to="/">My Super Awesome Blog</NavLink></li>
-        <li><NavLink to="/posts/new">new post</NavLink></li>
+        <li id="site-name"><NavLink to="/">My Blog</NavLink></li>
+        <li id="new-post-button"><NavLink to="/posts/new"><i className="fa-solid fa-plus" />new post</NavLink></li>
       </ul>
     </nav>
   );

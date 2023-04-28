@@ -1,6 +1,11 @@
+/* eslint-disable import/no-extraneous-dependencies */
+/* eslint-disable no-unused-vars */
 import React, { useEffect } from 'react';
 import { connect, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import CardMedia from '@mui/material/CardMedia';
 import { fetchPosts } from '../actions/index';
 
 function Posts(props) {
@@ -10,18 +15,24 @@ function Posts(props) {
 
   const allPosts = useSelector((store) => store.posts.all);
   const postList = allPosts.map((post) => (
-    <li key={post.id}>
+    <Card sx={{ maxWidth: 500 }} className="post-card">
       <Link to={`/posts/${post.id}`}>
         <h1>{post.title}</h1>
-        <img src={post.cover_url} alt={post.title} />
-        <div>{post.tags}</div>
+        <CardMedia
+          component="img"
+          height="250"
+          image={post.coverUrl}
+          alt={post.title}
+        />
+        <CardContent>
+          <div>{post.tags}</div>
+        </CardContent>
       </Link>
-    </li>
+    </Card>
   ));
   return (
     <div>
-      <h1>All Posts</h1>
-      <ul>
+      <ul id="posts-list">
         {postList}
       </ul>
     </div>
