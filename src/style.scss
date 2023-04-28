@@ -67,6 +67,24 @@ i{
 
 }
 
+#submit-button{
+  background-color: #7bdff2;
+  text-decoration: none;
+  border-radius: 40px;
+  padding: 10px 20px;
+  box-shadow: 2px 2px 4px #D3D3D3;
+  width: fit-content;
+  margin-top: 20px;
+  align-self: flex-end;
+  justify-self: end;
+
+&:hover {
+  background-color: #73C4D3;
+  transform: scale(1.02);
+}
+
+}
+
 #posts-list{
   display: flex;
   flex-direction: row;
@@ -101,6 +119,8 @@ i{
   form{
     padding: 20px;
     font-size: 1.2em;
+    display: flex;
+    flex-direction: column;
   }
 }
 

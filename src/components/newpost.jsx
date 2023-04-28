@@ -1,6 +1,10 @@
+/* eslint-disable jsx-a11y/label-has-associated-control */
+/* eslint-disable import/no-extraneous-dependencies */
 import React, { useState } from 'react';
 import { useDispatch, connect } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import Paper from '@mui/material/Paper';
+import TextareaAutosize from 'react-textarea-autosize';
 
 function NewPost(props) {
   const [title, setTitle] = useState('');
@@ -36,51 +40,43 @@ function NewPost(props) {
   }
 
   return (
-    <div>
+    <Paper className="single-post">
       <h1>New Post</h1>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="title">Title:
-            <input
-              id="title"
-              type="text"
-              value={title}
-              onChange={(event) => setTitle(event.target.value)}
-            />
-          </label>
-        </div>
-        <div>
-          <label htmlFor="content">Content:
-            <textarea
-              id="content"
-              value={content}
-              onChange={(event) => setContent(event.target.value)}
-            />
-          </label>
-
-        </div>
-        <div>
-          <label htmlFor="tags">Tags:    <input
+      <form>
+        <label htmlFor="title">Title:
+          <input
+            id="title"
+            type="text"
+            value={title}
+            onChange={(event) => setTitle(event.target.value)}
+          />
+        </label>
+        <label htmlFor="imgUrl">Image URL:
+          <input
+            id="imgUrl"
+            type="text"
+            value={coverUrl}
+            onChange={(event) => setCoverUrl(event.target.value)}
+          />
+        </label>
+        <label htmlFor="tags">Tags:
+          <input
             id="tags"
             type="text"
             value={tags}
             onChange={(event) => setTags(event.target.value)}
           />
-          </label>
-        </div>
-        <div>
-          <label htmlFor="coverUrl">Cover Url:
-            <input
-              id="coverUrl"
-              type="text"
-              value={coverUrl}
-              onChange={(event) => setCoverUrl(event.target.value)}
-            />
-          </label>
-        </div>
-        <input type="submit" value="Submit" />
+        </label>
+        <label htmlFor="content"> Content:
+          <TextareaAutosize required
+            id="content"
+            value={content}
+            onChange={(event) => setContent(event.target.value)}
+          />
+        </label>
+        <div id="submit-button" onClick={handleSubmit} role="button" tabIndex={0}>Submit</div>
       </form>
-    </div>
+    </Paper>
   );
 }
 
