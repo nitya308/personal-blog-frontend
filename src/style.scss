@@ -50,6 +50,12 @@ i{
 
 #site-name {
   font-size: 2em;
+
+  a {
+    &:hover {
+      color:#4E2587;
+    }
+  }
 }
 
 #new-post-button{
