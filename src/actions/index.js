@@ -56,11 +56,14 @@ export function createPost(post, navigate) {
 }
 
 export function updatePost(post) { /* axios put */
-  axios.put(`${ROOT_URL}/posts${API_KEY}`, post).then((response) => {
-  // do something with response.data  (some json)
-  }).catch((error) => {
-  // hit an error do something else!
-  });
+  return (dispatch) => {
+    axios.put(`${ROOT_URL}/posts${API_KEY}`, post).then((response) => {
+      dispatch({type: ActionTypes.FETCH_POST, payload: response.data})
+      // do something with response.data  (some json)
+    }).catch((error) => {
+      // hit an error do something else!
+    });
+  };
 }
 
 export function fetchPost(id) { /* axios get */
@@ -68,13 +71,25 @@ export function fetchPost(id) { /* axios get */
     axios.get(`${ROOT_URL}/posts/${id}${API_KEY}`).then((response) => {
       dispatch({ type: ActionTypes.FETCH_POST, payload: response.data });
     }).catch((error) => {
-    // hit an error do something else!
+      // hit an error do something else!
     });
   };
 }
 
-export function deletePost(id, navigate) { /* axios delete */ }
+export function deletePost(id, navigate) { 
+  /* axios delete */ 
+  return (dispatch) => {
+    axios.delete(`${ROOT_URL}/posts/${id}${API_KEY}`).then((response) => {
+      dispatch({ type: ActionTypes.FETCH_POST, payload: response.data });
+    }).catch((error) => {
+      // hit an error do something else!
+    });
+  };
+}
 
+
+
+// CURL commands
 // # all posts get:
 // curl -X GET "https://platform.cs52.me/api/posts?key=NITYA_AGARWALA"
 
