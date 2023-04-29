@@ -11,18 +11,6 @@ export const ActionTypes = {
 const ROOT_URL = 'https://platform.cs52.me/api';
 const API_KEY = '?key=NITYA_AGARWALA';
 
-// axios.get(`${ROOT_URL}/posts${API_KEY}`).then(response => {
-//   // do something with response.data  (some json)
-// }).catch(error => {
-//   // hit an error do something else!
-// });
-
-// //or
-// const response = await axios.get(`${ROOT_URL}/posts${API_KEY}`)
-
-// const fields = {title: '', content:'', coverUrl: '', tags: ''};
-// const result = await axios.post(`${ROOT_URL}/posts${API_KEY}`, fields);
-
 export function fetchPosts() {
   // ActionCreator returns a function
   // that gets called with dispatch
@@ -55,11 +43,10 @@ export function createPost(post, navigate) {
   };
 }
 
-export function updatePost(post) { /* axios put */
+export function updatePost(id, post) { /* axios put */
   return (dispatch) => {
-    axios.put(`${ROOT_URL}/posts${API_KEY}`, post).then((response) => {
+    axios.put(`${ROOT_URL}/posts/${id}${API_KEY}`, post).then((response) => {
       dispatch({ type: ActionTypes.FETCH_POST, payload: response.data });
-      // do something with response.data  (some json)
     }).catch((error) => {
       // hit an error do something else!
     });
@@ -81,6 +68,7 @@ export function deletePost(id, navigate) {
   return (dispatch) => {
     axios.delete(`${ROOT_URL}/posts/${id}${API_KEY}`).then((response) => {
       dispatch({ type: ActionTypes.FETCH_POST, payload: response.data });
+      navigate('/');
     }).catch((error) => {
       // hit an error do something else!
     });

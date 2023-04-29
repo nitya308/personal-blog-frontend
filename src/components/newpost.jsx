@@ -1,42 +1,32 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable import/no-extraneous-dependencies */
 import React, { useState } from 'react';
-import { useDispatch, connect } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import Paper from '@mui/material/Paper';
 import TextareaAutosize from 'react-textarea-autosize';
+import { connect } from 'react-redux';
+import { createPost } from '../actions';
 
 function NewPost(props) {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [tags, setTags] = useState('');
   const [coverUrl, setCoverUrl] = useState('');
-  const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  function handleSubmit(event) {
-    event.preventDefault();
+  function handleSubmit() {
+    // some error checking for blank title or content
+    if (title.length === 0 || content.length === 0) {
+      return;
+    }
     const post = {
       title,
       content,
       tags,
-      cover_url: coverUrl,
+      coverUrl,
     };
-    fetch('http://localhost:3000/posts', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(post),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        dispatch({
-          type: 'ADD_POST',
-          payload: data,
-        });
-        navigate(`/posts/${data.id}`);
-      });
+    // console.log('updating post', newPost);
+    props.createPost(post, navigate);
   }
 
   return (
@@ -80,4 +70,4 @@ function NewPost(props) {
   );
 }
 
-export default connect(null)(NewPost);
+export default connect(null, { createPost })(NewPost);

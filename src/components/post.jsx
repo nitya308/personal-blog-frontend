@@ -4,7 +4,7 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import React, { useState, useEffect } from 'react';
 import ReactMarkdown from 'react-markdown';
-import { useParams } from 'react-router';
+import { useNavigate, useParams } from 'react-router';
 // some imports
 import { connect } from 'react-redux';
 import Paper from '@mui/material/Paper';
@@ -14,6 +14,7 @@ import { fetchPost, deletePost, updatePost } from '../actions/index';
 function Post(props) {
   const { postID } = useParams();
   console.log('id', postID);
+  const navigate = useNavigate();
 
   useEffect(() => {
     props.fetchPost(postID);
@@ -30,17 +31,22 @@ function Post(props) {
   const [newContent, setNewContent] = useState(content);
 
   const handleDeletePost = () => {
-    props.deletePost(postID);
+    props.deletePost(postID, navigate);
   };
 
   const handleUpdatePost = () => {
+    // some error checking for blank title or content
+    if (newTitle.length === 0 || newContent.length === 0) {
+      return;
+    }
     const newPost = {
       title: newTitle,
       content: newContent,
       tags: newTags,
       coverUrl: newImgUrl,
     };
-    props.updatePost(newPost);
+    // console.log('updating post', newPost);
+    props.updatePost(postID, newPost);
     setIsEditing(false);
   };
 
