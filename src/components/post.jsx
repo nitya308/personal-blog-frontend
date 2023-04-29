@@ -48,6 +48,10 @@ function Post(props) {
     // console.log('updating post', newPost);
     props.updatePost(postID, newPost);
     setIsEditing(false);
+    setNewTitle("");
+    setNewImgUrl("");
+    setNewTags("");
+    setNewContent("");
   };
 
   function renderPost() {
