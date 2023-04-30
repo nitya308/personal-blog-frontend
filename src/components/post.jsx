@@ -16,6 +16,11 @@ function Post(props) {
   console.log('id', postID);
   const navigate = useNavigate();
   const [loaded, setLoaded] = useState(false);
+  const [isEditing, setIsEditing] = useState(false);
+  const [newTitle, setNewTitle] = useState('');
+  const [newImgUrl, setNewImgUrl] = useState('');
+  const [newTags, setNewTags] = useState('');
+  const [newContent, setNewContent] = useState('');
 
   useEffect(() => {
     props.fetchPost(postID);
@@ -32,11 +37,10 @@ function Post(props) {
     title, content, tags, coverUrl,
   } = props.currentPost;
 
-  const [isEditing, setIsEditing] = useState(false);
-  const [newTitle, setNewTitle] = useState(title);
-  const [newImgUrl, setNewImgUrl] = useState(coverUrl);
-  const [newTags, setNewTags] = useState(title);
-  const [newContent, setNewContent] = useState(content);
+  setNewTitle(title);
+  setNewImgUrl(coverUrl);
+  setNewTags(tags);
+  setNewContent(content);
 
   const handleDeletePost = () => {
     props.deletePost(postID, navigate);
