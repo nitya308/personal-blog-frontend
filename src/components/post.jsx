@@ -15,14 +15,16 @@ function Post(props) {
   const { postID } = useParams();
   console.log('id', postID);
   const navigate = useNavigate();
+  const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
     props.fetchPost(postID);
-    setNewTitle(props.currentPost.title);
-    setNewImgUrl(props.currentPost.coverUrl);
-    setNewTags(props.currentPost.tags);
-    setNewContent(props.currentPost.content);
+    setLoaded(true);
   }, []);
+
+  if (!loaded) {
+    return <div>Loading...</div>;
+  }
 
   console.log('current post', props.currentPost);
 
@@ -35,8 +37,6 @@ function Post(props) {
   const [newImgUrl, setNewImgUrl] = useState(coverUrl);
   const [newTags, setNewTags] = useState(title);
   const [newContent, setNewContent] = useState(content);
-
-
 
   const handleDeletePost = () => {
     props.deletePost(postID, navigate);
