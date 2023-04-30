@@ -25,6 +25,10 @@ function Post(props) {
   useEffect(() => {
     props.fetchPost(postID);
     setLoaded(true);
+    setNewTitle(props.currentPost.title);
+    setNewImgUrl(props.currentPost.coverUrl);
+    setNewTags(props.currentPost.tags);
+    setNewContent(props.currentPost.content);
   }, []);
 
   if (!loaded) {
@@ -36,11 +40,6 @@ function Post(props) {
   const {
     title, content, tags, coverUrl,
   } = props.currentPost;
-
-  setNewTitle(title);
-  setNewImgUrl(coverUrl);
-  setNewTags(tags);
-  setNewContent(content);
 
   const handleDeletePost = () => {
     props.deletePost(postID, navigate);
