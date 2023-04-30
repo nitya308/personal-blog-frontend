@@ -17,11 +17,11 @@ function Post(props) {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const fetch = async () => {
-      await props.fetchPost(postID);
-      // setLoadedState(true); //or some followup
-    };
-    fetch();
+    props.fetchPost(postID);
+    setNewTitle(props.currentPost.title);
+    setNewImgUrl(props.currentPost.coverUrl);
+    setNewTags(props.currentPost.tags);
+    setNewContent(props.currentPost.content);
   }, []);
 
   console.log('current post', props.currentPost);
