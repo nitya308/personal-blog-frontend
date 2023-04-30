@@ -15,7 +15,7 @@ function Posts(props) {
 
   const allPosts = useSelector((store) => store.posts.all);
   const postList = allPosts.map((post) => (
-    <Card sx={{ maxWidth: 500 }} className="post-card">
+    <Card sx={{ maxWidth: 500 }} className="post-card" key={post.id}>
       <Link to={`/posts/${post.id}`}>
         <h1>{post.title}</h1>
         <CardMedia

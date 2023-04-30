@@ -16,9 +16,7 @@ function Post(props) {
   console.log('id', postID);
   const navigate = useNavigate();
 
-  useEffect(() => {
-    props.fetchPost(postID);
-  }, []);
+  console.log('current post', props.currentPost);
 
   const {
     title, content, tags, coverUrl,
@@ -29,6 +27,11 @@ function Post(props) {
   const [newImgUrl, setNewImgUrl] = useState(coverUrl);
   const [newTags, setNewTags] = useState(title);
   const [newContent, setNewContent] = useState(content);
+
+  useEffect(() => {
+    props.fetchPost(postID);
+    console.log('fetching post');
+  }, []);
 
   const handleDeletePost = () => {
     props.deletePost(postID, navigate);
@@ -48,10 +51,10 @@ function Post(props) {
     // console.log('updating post', newPost);
     props.updatePost(postID, newPost);
     setIsEditing(false);
-    setNewTitle("");
-    setNewImgUrl("");
-    setNewTags("");
-    setNewContent("");
+    setNewTitle(' ');
+    setNewImgUrl(' ');
+    setNewTags(' ');
+    setNewContent(' ');
   };
 
   function renderPost() {

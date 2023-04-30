@@ -94,8 +94,8 @@ i{
 #posts-list{
   display: flex;
   flex-direction: row;
-  justify-content: center;
-  align-items: center;
+  justify-content: flex-start;
+  align-items: flex-start;
   padding: 10px;
   gap: 20px;
   flex-wrap: wrap;
